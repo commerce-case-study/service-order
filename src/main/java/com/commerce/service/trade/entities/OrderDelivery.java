@@ -23,6 +23,9 @@ public class OrderDelivery {
     @Column(name = "courier_name")
     private String courierName;
     
+    @Column(name = "service_type")
+    private String serviceType;
+    
     @Column(name = "awb_number")
     private String awbNumber;
     
@@ -44,6 +47,9 @@ public class OrderDelivery {
     @Column(name = "sender_full_address")
     private String senderFullAddress;
     
+    @Column(name = "sender_postal_code")
+    private String senderPostalCode;
+    
     @Column(name = "receiver_phone")
     private String receiverPhone;
     
@@ -61,4 +67,7 @@ public class OrderDelivery {
     
     @Column(name = "receiver_full_address")
     private String receiverFullAddress;
+    
+    @Column(name = "receiver_postal_code")
+    private String receiverPostalCode;
 }
