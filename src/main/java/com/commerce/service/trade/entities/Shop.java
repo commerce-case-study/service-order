@@ -17,11 +17,14 @@ public class Shop {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     
+    @Column(name = "member_id", nullable = false)
+    private Long memberId;
+    
     @Column(name = "member_address_id", nullable = false)
     private Long memberAddressId;
     
     @Column(name = "shop_name", nullable = false)
-    private Long shopName;
+    private String shopName;
     
     private String status;
 }

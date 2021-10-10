@@ -1,5 +1,7 @@
 package com.commerce.service.trade.api;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,10 +48,20 @@ public class TradeApi {
         return order.getId();
     }
     
+    @GetMapping(value = "updateOrderStatus/{orderId}/{status}", produces = "application/json")
+    public Boolean updateOrderStatus(@PathVariable("orderId") Long orderId, @PathVariable("status") String status) {
+    	return orderDao.updateOrderStatus(orderId, status) > 0;
+    }
+    
     @PostMapping(value = "createOrderItem", consumes = "application/json")
     public Long createOrderItem(@RequestBody OrderItem orderItem) {
         orderItemDao.save(orderItem);
         return orderItem.getId();
+    }
+    
+    @GetMapping(value = "findOrderItemByOrderId/{orderId}", produces = "application/json")
+    public List<OrderItem> findOrderItemByOrderId(@PathVariable("orderId") Long orderId) {
+        return orderItemDao.findByOrderId(orderId);
     }
     
     @PostMapping(value = "createOrderPayment", consumes = "application/json")
@@ -58,10 +70,24 @@ public class TradeApi {
         return orderPayment.getId();
     }
     
+    @GetMapping(value = "findOrderPaymentByOrderId/{orderId}", produces = "application/json")
+    public OrderPayment findOrderPaymentByOrderId(@PathVariable("orderId") Long orderId) {
+        List<OrderPayment> list = orderPaymentDao.findByOrderIdOrderByIdDesc(orderId);
+        if(null != list && !list.isEmpty()) {
+            return list.get(0);
+        }
+        return null;
+    }
+    
     @PostMapping(value = "createOrderDelivery", consumes = "application/json")
     public Long createOrderDelivery(@RequestBody OrderDelivery orderDelivery) {
         orderDeliveryDao.save(orderDelivery);
         return orderDelivery.getId();
+    }
+    
+    @GetMapping(value = "findOrderDeliveryByOrderId/{orderId}", produces = "application/json")
+    public OrderDelivery findOrderDeliveryByOrderId(@PathVariable("orderId") Long orderId) {
+        return orderDeliveryDao.findByOrderId(orderId).orElse(null);
     }
     
     @GetMapping(value = "findShopById/{shopId}", produces = "application/json")
