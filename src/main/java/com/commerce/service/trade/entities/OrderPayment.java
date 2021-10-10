@@ -25,7 +25,7 @@ public class OrderPayment {
     @Column(name = "payment_code", nullable = false)
     private String paymentCode;
     
-    private String type;
+    private String status;
     
     private BigDecimal amount;
 }

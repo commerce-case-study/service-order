@@ -1,10 +1,10 @@
 # Spring Config, Persistance, Database
 spring:
   application:
-    name: service-product
+    name: service-trade
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://host.docker.internal:3306/db_commerce?serverTimezone=Asia/Jakarta&useLegacyDatetimeCode=false
+    url: jdbc:mysql://127.0.0.1:3306/db_trade?serverTimezone=Asia/Jakarta&useLegacyDatetimeCode=false
     username: ucommerce
     password: 123qwe
   jpa: 

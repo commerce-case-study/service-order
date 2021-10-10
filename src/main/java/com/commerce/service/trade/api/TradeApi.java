@@ -73,4 +73,14 @@ public class TradeApi {
     public Order findOrderByOrderCode(@PathVariable("orderCode") String orderCode) {
         return orderDao.findByOrderCode(orderCode).orElse(null);
     }
+    
+    @GetMapping(value = "findOrderPaymentByPaymentCode/{paymentCode}", produces = "application/json")
+    public OrderPayment findOrderPaymentByPaymentCode(@PathVariable("paymentCode") String paymentCode) {
+        return orderPaymentDao.findByPaymentCode(paymentCode).orElse(null);
+    }
+    
+    @GetMapping(value = "updateOrderPaymentStatus/{paymentCode}/{status}", produces = "application/json")
+    public boolean updateOrderPaymentStatus(@PathVariable("paymentCode") String paymentCode, @PathVariable("status") String status) {
+        return orderPaymentDao.updateOrderPaymentStatus(paymentCode, status) > 0;
+    }
 }
